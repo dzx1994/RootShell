@@ -27,21 +27,9 @@ public final class RootShell {
         this.mProcess = null;
         requestRoot();
     }
-
-    private RootShell(Handler handler) {
-        this();
-        this.mHandler = handler;
-    }
-
-    public static RootShell open(Handler handler) {
-        if (mInstance == null) {
-            mInstance = new RootShell(handler);
-        } else if (mInstance.mHandler == null) {
-            mInstance.mHandler = handler;
-        }
-        return mInstance;
-    }
-
+   /**
+    * get a instance
+    */
     public static RootShell open() {
         if (mInstance == null) {
             mInstance = new RootShell();
@@ -63,6 +51,10 @@ public final class RootShell {
         mInstance = null;
     }
 
+    /**
+     * execute shell cmd
+     * @param command shell command
+     */
     public void execute(String command) {
         try {
             if (this.mOutput == null) {
@@ -77,6 +69,9 @@ public final class RootShell {
         }
     }
 
+    /**
+     * request root permission
+     */
     private void requestRoot() {
         try {
             this.mProcess = Runtime.getRuntime().exec("su \n");

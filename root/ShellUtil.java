@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public class ShellUtil {
-    private static final String TAG = RootShell.class.getSimpleName();
+    private static final String TAG = ShellUtil.class.getSimpleName();
     public static final String COMMAND_SU = "su";
     public static final String COMMAND_SH = "sh";
     public static final String COMMAND_EXIT = "exit\n";
