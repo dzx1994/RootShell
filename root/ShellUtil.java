@@ -8,10 +8,11 @@ import java.util.List;
 
 /**
  * Created by Sean on 2017/3/9.
+ * ShellUtil
  */
 
 public class ShellUtil {
-
+    private static final String TAG = RootShell.class.getSimpleName();
     public static final String COMMAND_SU = "su";
     public static final String COMMAND_SH = "sh";
     public static final String COMMAND_EXIT = "exit\n";
@@ -23,8 +24,6 @@ public class ShellUtil {
 
     /**
      * check whether has root permission
-     *
-     * @return
      */
     public static boolean checkRootPermission() {
         return execCommand("echo root", true, false).result == 0;
@@ -35,7 +34,6 @@ public class ShellUtil {
      *
      * @param command command
      * @param isRoot  whether need to run with root
-     * @return
      */
     public static CommandResult execCommand(String command, boolean isRoot) {
         return execCommand(new String[]{command}, isRoot, true);
@@ -46,7 +44,6 @@ public class ShellUtil {
      *
      * @param commands command list
      * @param isRoot   whether need to run with root
-     * @return
      */
     public static CommandResult execCommand(List<String> commands, boolean isRoot) {
         return execCommand(commands == null ? null : commands.toArray(new String[]{}), isRoot, true);
@@ -57,7 +54,6 @@ public class ShellUtil {
      *
      * @param commands command array
      * @param isRoot   whether need to run with root
-     * @return
      */
     public static CommandResult execCommand(String[] commands, boolean isRoot) {
         return execCommand(commands, isRoot, true);
@@ -69,7 +65,6 @@ public class ShellUtil {
      * @param command         command
      * @param isRoot          whether need to run with root
      * @param isNeedResultMsg whether need result msg
-     * @return
      */
     public static CommandResult execCommand(String command, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(new String[]{command}, isRoot, isNeedResultMsg);
@@ -81,7 +76,6 @@ public class ShellUtil {
      * @param commands        command list
      * @param isRoot          whether need to run with root
      * @param isNeedResultMsg whether need result msg
-     * @return
      */
     public static CommandResult execCommand(List<String> commands, boolean isRoot, boolean isNeedResultMsg) {
         return execCommand(commands == null ? null : commands.toArray(new String[]{}), isRoot, isNeedResultMsg);
@@ -93,11 +87,6 @@ public class ShellUtil {
      * @param commands        command array
      * @param isRoot          whether need to run with root
      * @param isNeedResultMsg whether need result msg
-     * @return <ul>
-     * <li>if isNeedResultMsg is false, {@link CommandResult#successMsg} is null and
-     * {@link CommandResult#errorMsg} is null.</li>
-     * <li>if {@link CommandResult#result} is -1, there maybe some excepiton.</li>
-     * </ul>
      */
     public static CommandResult execCommand(String[] commands, boolean isRoot, boolean isNeedResultMsg) {
         int result = -1;
@@ -172,28 +161,18 @@ public class ShellUtil {
 
     /**
      * result of command
-     * <ul>
-     * <li>{@link CommandResult#result} means result of command, 0 means normal, else means error, same to excute in
-     * linux shell</li>
-     * <li>{@link CommandResult#successMsg} means success message of command result</li>
-     * <li>{@link CommandResult#errorMsg} means error message of command result</li>
-     * </ul>
-     *
-     * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-5-16
      */
     public static class CommandResult {
 
-        /**
-         * result of command
-         **/
+        //result of command
+
         public int result;
-        /**
-         * success message of command result
-         **/
+        // success message of command result
+
         public String successMsg;
-        /**
-         * error message of command result
-         **/
+
+        // error message of command result
+
         public String errorMsg;
 
         public CommandResult(int result) {

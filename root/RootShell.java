@@ -7,11 +7,12 @@ import java.io.OutputStream;
 
 /**
  * Created by Sean on 2017/3/9.
+ * RootShell
  */
 
 public final class RootShell {
     private static final String TAG = RootShell.class.getSimpleName();
-    private static final String hookRootedCmd = "echo \"rootOK\"\n";
+    private static final String HOOK_ROOT_CMD = "echo \"rootOK\"\n";
     private static RootShell mInstance;
     private Handler mHandler;
     private OutputStream mOutput;
@@ -80,7 +81,7 @@ public final class RootShell {
         try {
             this.mProcess = Runtime.getRuntime().exec("su \n");
             this.mOutput = this.mProcess.getOutputStream();
-            this.mOutput.write(hookRootedCmd.getBytes());
+            this.mOutput.write(HOOK_ROOT_CMD.getBytes());
             this.mOutput.flush();
         } catch (IOException e) {
             e.printStackTrace();
